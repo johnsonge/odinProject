@@ -1,0 +1,46 @@
+.header{
+	text-align: right;
+}
+a:hover{
+	text-decoration: underline;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+#footer{
+	height: 50px;
+	bottom: 0;
+	border-top: 1px solid #e4e4e4;
+	background-color: #f2f2f2;
+	position: absolute;
+	width: 100%;
+}
+
+#left{
+	position: relative;
+	top: 50%;
+	  -webkit-transform: translateY(-50%);
+  	  -ms-transform: translateY(-50%);
+  	transform: translateY(-50%);
+	float: left;
+	width: 50%;
+
+}
+
+#right{
+	position: relative;
+	top: 50%;
+	  -webkit-transform: translateY(-50%);
+  	  -ms-transform: translateY(-50%);
+  	transform: translateY(-50%);
+	float: right;
+	text-align: right;
+	width: 50%;
+}
+
+#clear{
+	clear:both;
+}

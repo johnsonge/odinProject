@@ -1,62 +1,89 @@
 $(document).ready(function(){
-	$('.container').prepend('<button onclick="newGrid(); return false">New Grid</button>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-    .append('<ul></ul>')
-  
-  $('ul').append('<li></li>')
-    .append('<li></li>')
-    .append('<li></li>')
-    .append('<li></li>')
-	.append('<li></li>')    
-	.append('<li></li>')
-    .append('<li></li>')
-    .append('<li></li>')
-	.append('<li></li>')
-    .append('<li></li>')
-    .append('<li></li>')
-    .append('<li></li>')
-	.append('<li></li>')
-    .append('<li></li>')
-    .append('<li></li>')
-	.append('<li></li>')
-
-  $('li').css({
-    display: 'inline-block',
-    'list-style-type': 'none',
-    height: '25px',
-    width: '25px',
-    border: '1px black solid',
-    margin: '0 1px',
-    'box-sizing': 'border-box'}).hover(function() {
-    $(this).css('background-color','blue')
-  });
-
-  $('.container').css({
-    margin: '0 auto'
-  });
-
-  $('ul').css({
-    padding: '0',
-    margin: '0'
-  });
-
-  $('button').css({
-    margin: '10px 0',
-    padding: '10px',
-    'font-size': '16px'
-  });
+	createGrid(16);
+	generate();
+	standard();
+	random();
+	gradient();
+	clear();
 });
+
+function createGrid(x){
+	var squareSize = (500/x);
+
+	for(var i = 0; i < (x*x); i++) {
+		$('#grid').prepend('<div class="square"></div>');
+	}
+
+	$(".square").width(squareSize);
+	$(".square").height(squareSize);
+
+	sketch();
+}
+
+function sketch(){
+	$(".square").mouseover(function(){
+		$(this).css("background-color", "white");
+	});
+}
+
+function clear() {
+	$("#clear").click(function(){
+		$(".square").unbind();
+		$(".square").css("background-color", "#A0B8CA");
+		$(".square").css("opacity", 1);
+		sketch();
+	});
+}
+
+function generate() {
+	$("#generate").click(function(){
+		$(".square").remove();
+		var newSize = $("input[name=size]").val();
+		createGrid(newSize);
+	});
+}
+
+function standard() {
+	$("#standard").click(function(){
+		$(".square").unbind();
+		$(".square").css("background-color", "#A0B8CA");
+		$(".square").css("opacity", 1);
+		sketch();
+	})
+}
+
+function random() {
+	$("#random").click(function(){
+		$(".square").unbind();
+		$(".square").css("background-color", "#A0B8CA");
+		$(".square").css("opacity", 1);
+		$(".square").mouseover(function(){
+			$(this).css("background-color", getRandomColor());
+		});
+	});
+}
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+function gradient(){
+	$("#gradient").click(function(){
+		$(".square").unbind();
+		$(".square").css("background-color", "#A0B8CA");
+		$(".square").css("opacity", 1);
+		$(".square").mouseover(function(){
+			var opacity = $(this).css("opacity");
+			if (opacity > 0.1) {
+				$(this).css("opacity", opacity - 0.1);
+			}else {
+				$(this).css("opacity", 0);
+			}
+		})
+	})
+}
